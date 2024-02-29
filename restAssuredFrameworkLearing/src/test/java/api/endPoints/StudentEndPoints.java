@@ -6,7 +6,9 @@ import java.util.Map;
 
 import com.aventstack.extentreports.gherkin.model.Given;
 
+import api.payloads.StudentBulkImportPojo;
 import api.payloads.createStudent;
+import api.payloads.reportDetails;
 import api.payloads.studentInfo;
 import api.test.StudentTest;
 import bsh.This;
@@ -71,5 +73,19 @@ public class StudentEndPoints {
 		
 	}
 	
+	public static Response createBulkStudent(reportDetails report) {
+		Response response= given()
+		.contentType(ContentType.JSON)
+		.accept(ContentType.JSON)
+		.auth()
+		.oauth2(Auth.getToken())
+		.body(report)
+		.when()
+		
+		.post(Routes.Std_Bulk_URL);
+		
+		return response;
+		
+	}
 
 }

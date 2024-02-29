@@ -2,24 +2,24 @@
 <testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-02-27T19:03:39 IST" name="Default suite" finished-at="2024-02-27T19:03:53 IST" duration-ms="13095">
+  <suite started-at="2024-02-29T19:41:32 IST" name="Suite" finished-at="2024-02-29T19:41:45 IST" duration-ms="13501">
     <groups>
     </groups>
-    <test started-at="2024-02-27T19:03:39 IST" name="Default test" finished-at="2024-02-27T19:03:53 IST" duration-ms="13095">
+    <test started-at="2024-02-29T19:41:32 IST" name="Test" finished-at="2024-02-29T19:41:45 IST" duration-ms="13501">
       <class name="api.test.StudentTest">
-        <test-method signature="createStudentApi()[pri:1, instance:api.test.StudentTest@7ea9e1e2]" started-at="2024-02-27T19:03:39 IST" name="createStudentApi" finished-at="2024-02-27T19:03:47 IST" duration-ms="7386" status="PASS">
+        <test-method signature="createStudentApi()[pri:1, instance:api.test.StudentTest@24fcf36f]" started-at="2024-02-29T19:41:32 IST" name="createStudentApi" finished-at="2024-02-29T19:41:39 IST" duration-ms="6592" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- createStudentApi -->
-        <test-method signature="getCreatedStudentInfo()[pri:2, instance:api.test.StudentTest@7ea9e1e2]" started-at="2024-02-27T19:03:47 IST" name="getCreatedStudentInfo" finished-at="2024-02-27T19:03:50 IST" duration-ms="2793" status="PASS">
+        <test-method signature="getCreatedStudentInfo()[pri:2, instance:api.test.StudentTest@24fcf36f]" started-at="2024-02-29T19:41:39 IST" name="getCreatedStudentInfo" finished-at="2024-02-29T19:41:41 IST" duration-ms="2825" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- getCreatedStudentInfo -->
-        <test-method signature="deleteStudentInfo()[pri:3, instance:api.test.StudentTest@7ea9e1e2]" started-at="2024-02-27T19:03:50 IST" name="deleteStudentInfo" finished-at="2024-02-27T19:03:53 IST" duration-ms="2850" status="PASS">
+        <test-method signature="deleteStudentInfo()[pri:3, instance:api.test.StudentTest@24fcf36f]" started-at="2024-02-29T19:41:41 IST" name="deleteStudentInfo" finished-at="2024-02-29T19:41:45 IST" duration-ms="3635" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- deleteStudentInfo -->
       </class> <!-- api.test.StudentTest -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
 </testng-results>

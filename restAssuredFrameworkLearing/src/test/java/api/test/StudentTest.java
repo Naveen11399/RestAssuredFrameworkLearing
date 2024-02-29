@@ -64,37 +64,45 @@ public class StudentTest {
 
 		Response response = StudentEndPoints.createStudent(create_Std);
 
-		System.out.println("Response: " + response.asString());
+		//System.out.println("Response: " + response.asString());
 
 		String message = response.jsonPath().getString("message");
 		System.out.println("message: " + message);
 
 		String name = response.jsonPath().getString("data.firstName");
 		System.out.println("name: " + name);
-		
-		 String studentId = response.jsonPath().getString("data.id");
-		System.out.println("studentId: " + studentId);
-		
+
+		String studentId = response.jsonPath().getString("data.id");
+		//System.out.println("studentId: " + studentId);
+
 		studentPesonal.setStudentId(studentId);
 		create_Std.setStudentInfo(studentPesonal);
 	}
-	
+
 	@Test(priority = 2)
 	public void getCreatedStudentInfo() {
-		
-		Response response=StudentEndPoints.getCreatedStudent(this.studentPesonal.getStudentId());
-		
-		System.out.println("Response: " + response.asString());
+
+		Response response = StudentEndPoints.getCreatedStudent(this.studentPesonal.getStudentId());
+		//response.then().log().all();
+		// System.out.println("Response: " + response.asString());
+		String message = response.jsonPath().getString("message");
+		System.out.println("message: " + message);
+
+
 	}
-	
+
 	@Test(priority = 3)
 	public void deleteStudentInfo() {
-		
-		Response response=StudentEndPoints.deleteStudent(this.studentPesonal.getStudentId());
-		
-		System.out.println("Response: " + response.asString());
-	}
-	
-	
 
+		Response response = StudentEndPoints.deleteStudent(this.studentPesonal.getStudentId());
+
+		String message = response.jsonPath().getString("message");
+		System.out.println("message: " + message);
+		//response.then().log().all();
+
+		// System.out.println("Response: " + response.asString());
+	}
+
+	
+	
 }
