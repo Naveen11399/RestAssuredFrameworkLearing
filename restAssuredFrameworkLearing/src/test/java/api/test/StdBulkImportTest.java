@@ -4,7 +4,11 @@ import java.io.File;
 
 import org.testng.annotations.Test;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import api.endPoints.StudentEndPoints;
+import api.payloads.StdImportPojo;
 import api.payloads.StudentBulkImportPojo;
 import api.payloads.reportDetails;
 import api.utilities.DataProviders;
@@ -12,7 +16,11 @@ import io.restassured.response.Response;
 
 public class StdBulkImportTest {
 
-	@Test(dataProvider = "StdBulk", dataProviderClass = DataProviders.class)
+	StudentBulkImportPojo student;
+	reportDetails report;
+	StdImportPojo studentDetails;
+
+	@Test(dataProvider = "StdBulk", dataProviderClass = DataProviders.class, priority = 1)
 	public void testDataFromExcel(String admissionNumber, String admissionDate, String studentName, String gender,
 			String dob, String grade, String section, String aadharNumber, String studentEmail, String studentContactNo,
 			String address, String secondLanguage, String thirdLanguage, String bloodGroup, String nationality,
@@ -28,10 +36,11 @@ public class StdBulkImportTest {
 			String guardianCompanyName, String guardianAadharNo, String guardianPassportNo,
 			String guardianCompanyAddress, String communication) {
 
-		// File fileToAttach = new File(System.getProperty("user.dir") + "//testdata//Student-sample-data (1) (1).xlsx");
-		StudentBulkImportPojo student = new StudentBulkImportPojo();
+		// File fileToAttach = new File(System.getProperty("user.dir") +
+		// "//testdata//Student-sample-data (1) (1).xlsx");
+		student = new StudentBulkImportPojo();
 
-		reportDetails report = new reportDetails();
+		report = new reportDetails();
 		report.setAdmissionNumber(admissionNumber);
 		report.setAdmissionDate(admissionDate);
 		report.setStudentName(studentName);
@@ -91,16 +100,53 @@ public class StdBulkImportTest {
 		report.setGuardianCompanyAddress(guardianCompanyAddress);
 		report.setCommunication(communication);
 
-		//student.setReportDetails(report);
+		// student.setReportDetails(report);
 
 //		ObjectMapper mapper = new ObjectMapper();
 //		String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(student);
 //
 //		System.out.println(json);
 		Response response = StudentEndPoints.createBulkStudent(report);
-		
+
+		String path = response.jsonPath().get("data.path");
+
+		String fileName = response.jsonPath().get("data.name");
+
+		// System.out.println(path +" gapu "+fileName);
+
+		report.setFileName(fileName);
+		report.setPath(path);
+		student.setReportDetails(report);
+
+		// System.out.println("Response: " + response.asString());
+	}
+
+	@Test(priority = 2)
+	public void viewFileInfo() {
+
+		Response response = StudentEndPoints.viewFileInfo(this.report.getFileName(), this.report.getPath());
+
 		response.then().log().all();
 
-		System.out.println("Response: " + response.asString());
+		String AddExcelPayload = response.jsonPath().get("data.reportDetails");
+		
+		studentDetails.setStudentDetails(AddExcelPayload);
+
+		// System.out.println(AddExcelPayload);
+
 	}
+
+	@Test(priority = 3)
+	public void AddStudentExcel() throws JsonProcessingException {
+
+		System.out.println(this.studentDetails.getStudentDetails());
+//		 ObjectMapper mapper = new ObjectMapper();
+//		    reportDetails report = mapper.readValue(AddExcelPayload, reportDetails.class);
+//		    
+//		    // Perform operations with the report object
+//		    System.out.println(report.getAdmissionNumber());
+//		    System.out.println(report.getStudentName());
+
+	}
+
 }

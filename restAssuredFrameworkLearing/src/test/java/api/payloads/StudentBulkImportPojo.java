@@ -10,6 +10,12 @@ public class StudentBulkImportPojo {
 	
 private reportDetails reportDetails;
 
+
+
+
+
+
+
 public reportDetails getReportDetails() {
 	return reportDetails;
 }

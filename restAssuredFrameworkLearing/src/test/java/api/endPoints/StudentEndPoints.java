@@ -2,6 +2,7 @@ package api.endPoints;
 
 import static io.restassured.RestAssured.given;
 
+import java.io.File;
 import java.util.Map;
 
 import com.aventstack.extentreports.gherkin.model.Given;
@@ -10,6 +11,7 @@ import api.payloads.StudentBulkImportPojo;
 import api.payloads.createStudent;
 import api.payloads.reportDetails;
 import api.payloads.studentInfo;
+import api.test.StdBulkImportTest;
 import api.test.StudentTest;
 import bsh.This;
 import io.restassured.http.ContentType;
@@ -74,18 +76,39 @@ public class StudentEndPoints {
 	}
 	
 	public static Response createBulkStudent(reportDetails report) {
-		Response response= given()
-		.contentType(ContentType.JSON)
-		.accept(ContentType.JSON)
-		.auth()
-		.oauth2(Auth.getToken())
-		.body(report)
-		.when()
 		
-		.post(Routes.Std_Bulk_URL);
+		File file=new File(System.getProperty("user.dir") + "//testdata//Student-sample-data (1) (1).xlsx");
+		
+		Response response= given()
+				.contentType("multipart/form-data")
+	            .multiPart(file)
+	            .multiPart("report", report, "application/json")
+		        .auth()
+		        .oauth2(Auth.getToken())
+//		        .body(report)
+	         	.when()
+		
+	         	 .post(Routes.Std_Bulk_URL + "?path=student-management/imports/");
 		
 		return response;
 		
 	}
+	
+	public static Response viewFileInfo(String fileName,String path ){
+	
+		
+//		 String getRequestUrl = Routes.View_Std_BulK_URL + "?fileName=" + fileName + "&filePath=" + path;
+		
+		
+		Response response=given()
+				.auth()
+				.oauth2(Auth.getToken())
+				.queryParam("fileName", fileName)
+                .queryParam("filePath", path)
+				.when()
+				.get(Routes.View_Std_BulK_URL);
+		
+		return response;
 
+}
 }
