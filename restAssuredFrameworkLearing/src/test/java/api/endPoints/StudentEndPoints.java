@@ -2,14 +2,18 @@ package api.endPoints;
 
 import static io.restassured.RestAssured.given;
 
+import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 import com.aventstack.extentreports.gherkin.model.Given;
 
+import api.payloads.StdImportPojo;
 import api.payloads.StudentBulkImportPojo;
 import api.payloads.createStudent;
 import api.payloads.reportDetails;
 import api.payloads.studentInfo;
+import api.test.StdBulkImportTest;
 import api.test.StudentTest;
 import bsh.This;
 import io.restassured.http.ContentType;
@@ -49,7 +53,7 @@ public class StudentEndPoints {
 	}
 	
 	public static Response getCreatedStudent(String studentId) {
-		System.out.println(studentId);
+	
 		Response response=
 				given()
 				.auth()
@@ -74,18 +78,82 @@ public class StudentEndPoints {
 	}
 	
 	public static Response createBulkStudent(reportDetails report) {
+		
+		File file=new File(System.getProperty("user.dir") + "//testdata//Student-sample-data (1) (1).xlsx");
+		
+		Response response= given()
+				.contentType("multipart/form-data")
+	            .multiPart(file)
+	            .multiPart("report", report, "application/json")
+		        .auth()
+		        .oauth2(Auth.getToken())
+
+	         	.when()
+		
+	         	 .post(Routes.Std_Bulk_URL + "?path=student-management/imports/");
+		
+		return response;
+		
+	}
+	
+	public static Response viewFileInfo(String fileName,String path ){
+	
+		
+
+		
+		
+		Response response=given()
+				.auth()
+				.oauth2(Auth.getToken())
+				.queryParam("fileName", fileName)
+                .queryParam("filePath", path)
+				.when()
+				.get(Routes.View_Std_BulK_URL);
+		
+		return response;
+
+}
+
+	public static Response UploadStudent(StdImportPojo studentPayload) {
+	
 		Response response= given()
 		.contentType(ContentType.JSON)
 		.accept(ContentType.JSON)
 		.auth()
 		.oauth2(Auth.getToken())
-		.body(report)
+		.body(studentPayload)
 		.when()
 		
-		.post(Routes.Std_Bulk_URL);
+		.post(Routes.Add_Std_BulK_URL);
 		
 		return response;
 		
 	}
-
+	
+	
+	public static Response getBulkStudent(Integer id) {
+		
+		Response response=
+				given()
+				.auth()
+				.oauth2(Auth.getToken())
+				.pathParam("studentId", id)
+				.get(Routes.Get_Created_Std_URL);
+		
+		return response;
+		
+	}
+	
+	
+	public static Response deleteBulkStudent(Integer id) {
+		Response  response=
+				given()
+				.auth()
+				.oauth2(Auth.getToken())
+				.pathParam("studentId", id)
+				.delete(Routes.Delete_Std_URL);
+		return response;
+		
+	}
+	
 }

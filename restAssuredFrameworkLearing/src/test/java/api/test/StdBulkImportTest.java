@@ -1,10 +1,17 @@
 package api.test;
 
-import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.testng.annotations.Test;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import api.endPoints.StudentEndPoints;
+import api.payloads.StdImportPojo;
 import api.payloads.StudentBulkImportPojo;
 import api.payloads.reportDetails;
 import api.utilities.DataProviders;
@@ -12,7 +19,11 @@ import io.restassured.response.Response;
 
 public class StdBulkImportTest {
 
-	@Test(dataProvider = "StdBulk", dataProviderClass = DataProviders.class)
+	StudentBulkImportPojo student;
+	reportDetails report;
+	StdImportPojo studentPayload;
+
+	@Test(dataProvider = "StdBulk", dataProviderClass = DataProviders.class, priority = 1)
 	public void testDataFromExcel(String admissionNumber, String admissionDate, String studentName, String gender,
 			String dob, String grade, String section, String aadharNumber, String studentEmail, String studentContactNo,
 			String address, String secondLanguage, String thirdLanguage, String bloodGroup, String nationality,
@@ -28,10 +39,9 @@ public class StdBulkImportTest {
 			String guardianCompanyName, String guardianAadharNo, String guardianPassportNo,
 			String guardianCompanyAddress, String communication) {
 
-		// File fileToAttach = new File(System.getProperty("user.dir") + "//testdata//Student-sample-data (1) (1).xlsx");
-		StudentBulkImportPojo student = new StudentBulkImportPojo();
+		student = new StudentBulkImportPojo();
 
-		reportDetails report = new reportDetails();
+		report = new reportDetails();
 		report.setAdmissionNumber(admissionNumber);
 		report.setAdmissionDate(admissionDate);
 		report.setStudentName(studentName);
@@ -91,16 +101,112 @@ public class StdBulkImportTest {
 		report.setGuardianCompanyAddress(guardianCompanyAddress);
 		report.setCommunication(communication);
 
-		//student.setReportDetails(report);
-
-//		ObjectMapper mapper = new ObjectMapper();
-//		String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(student);
-//
-//		System.out.println(json);
 		Response response = StudentEndPoints.createBulkStudent(report);
-		
-		response.then().log().all();
 
-		System.out.println("Response: " + response.asString());
+		String path = response.jsonPath().get("data.path");
+
+		String fileName = response.jsonPath().get("data.name");
+
+		report.setFileName(fileName);
+		report.setPath(path);
+		student.setReportDetails(report);
+
 	}
+
+	@Test(priority = 2)
+	public void viewFileInfo() throws JsonProcessingException {
+
+		Response response = StudentEndPoints.viewFileInfo(this.report.getFileName(), this.report.getPath());
+
+		ArrayList<LinkedHashMap<String, Object>> reportDetailsList = response.jsonPath().get("data.reportDetails");
+
+		JSONArray jsonArray = new JSONArray();
+
+		for (LinkedHashMap<String, Object> report : reportDetailsList) {
+			// Convert each report details map to JSONObject
+			JSONObject jsonObject = new JSONObject(report);
+
+			// Add the JSONObject to the JSONArray
+			jsonArray.put(jsonObject);
+		}
+
+		// Print the formatted JSONArray
+
+		String jsonArrayString = jsonArray.toString();
+
+//		if (studentPayload == null) {
+//			studentPayload = new StdImportPojo();
+//		}
+
+		studentPayload = new StdImportPojo();
+
+		studentPayload.setStudentDetails(jsonArrayString);
+
+	}
+
+	@Test(priority = 3)
+	public void AddStudentExcel() throws JsonProcessingException {
+
+		Response response = StudentEndPoints.UploadStudent(studentPayload);
+
+	
+
+		String id = response.jsonPath().getString("data[0].id");
+
+		// Extracting the firstName
+		String firstName = response.jsonPath().getString("data[0].firstName");
+
+		String id1 = response.jsonPath().getString("data[1].id");
+		String Name1 = response.jsonPath().getString("data[1].firstName");
+
+
+
+		List<Integer> ids = response.jsonPath().getList("data.id");
+		System.out.println("IDs: " + ids);
+
+		// Extracting the first names
+		List<String> firstNames = response.jsonPath().getList("data.firstName");
+		System.out.println("First Names: " + firstNames);
+
+		studentPayload.setStudentId(ids);
+		studentPayload.setStudentName(firstNames);
+		
+
+	}
+
+	@Test(priority = 4)
+	public void getBulkStudentInfo() {
+		// Single User
+		// Response response = StudentEndPoints.getBulkStudent(this.studentPayload.getStudentId());
+
+		for (Integer id : this.studentPayload.getStudentId()) {
+			Response response = StudentEndPoints.getBulkStudent(id);
+			//response.then().log().all();
+			String name = response.jsonPath().getString("data.studentInfo.name");
+			System.out.println("name: " + name);
+			String message = response.jsonPath().getString("message");
+			System.out.println("Message for student ID " + id + ": " + message);
+			// response.then().log().all();
+		}
+
+	}
+
+	@Test(priority = 5)
+	public void deleteBulkStudent() {
+
+		// Single User
+		// Response response = StudentEndPoints.deleteBulkStudent(this.studentPayload.getStudentId());
+
+		for (Integer id : this.studentPayload.getStudentId()) {
+
+			Response response = StudentEndPoints.deleteBulkStudent(id);
+		
+		    String message = response.jsonPath().getString("message");
+			System.out.println("Message for student ID " + id + ": " + message);
+			// response.then().log().all();
+
+		}
+
+	}
+
 }

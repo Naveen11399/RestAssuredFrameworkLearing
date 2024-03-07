@@ -5,7 +5,7 @@
     <classes>
       <class name="api.test.StdBulkImportTest">
         <methods>
-          <include name="testDataFromExcel" invocation-numbers="0 1"/>
+          <include name="AddStudentExcel"/>
         </methods>
       </class> <!-- api.test.StdBulkImportTest -->
     </classes>

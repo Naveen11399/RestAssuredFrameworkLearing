@@ -5,10 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class reportDetails {
-	private String path;
-	private String fileName;
-	
+public class studentDetails {
+
 	private String admissionNumber;
 	private String admissionDate;
 	private String studentName;
