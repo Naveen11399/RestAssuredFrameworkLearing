@@ -25,7 +25,7 @@ public class Routes {
 	public static String Add_Std_BulK_URL = Base_URL + "/student/add-student-excel";
 
 	
-     //https://dev-schoolapi.izome.in/api/student/add-student-excel
+
 	
 	
 }

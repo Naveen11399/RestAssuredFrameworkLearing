@@ -6,7 +6,6 @@
       <class name="api.test.StdBulkImportTest">
         <methods>
           <include name="AddStudentExcel"/>
-          <include name="viewFileInfo"/>
         </methods>
       </class> <!-- api.test.StdBulkImportTest -->
     </classes>
