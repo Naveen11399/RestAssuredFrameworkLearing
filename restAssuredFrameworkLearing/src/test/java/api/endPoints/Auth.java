@@ -2,24 +2,41 @@ package api.endPoints;
 
 import static io.restassured.RestAssured.given;
 
+import java.util.ResourceBundle;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
 public class Auth {
+	
+	  static ResourceBundle properties;
+	  
+
+      
+      
 	@BeforeSuite
-	 public static String getToken() {
+	 public static String getToken() throws JSONException {
+		
+		  properties=ResourceBundle.getBundle("config");
+		  String userName = properties.getString("userName");
+	      String password = properties.getString("password");
+	      String instituteCode = properties.getString("instituteCode");
+	      int deviceType = Integer.parseInt(properties.getString("deviceType"));
+		
+	   	JSONObject requestBody = new JSONObject();
+	    requestBody.put("userName", userName);
+	    requestBody.put("password", password);
+	    requestBody.put("instituteCode", instituteCode);
+	    requestBody.put("deviceType", deviceType);
+		
 	        Response response = given()
 	                .contentType(ContentType.JSON)
 	                .accept(ContentType.JSON)
-	                .body("{\r\n"
-	                        + "  \"userName\": \"AniAdmin\",\r\n"
-	                        + "  \"password\": \"Welcome@123\",\r\n"
-	                        + "  \"instituteCode\": \"U2FsdGVkX1/f+8i3htNx2A1IyTXfdPwMNhelIbOkNdg=\",\r\n"
-	                        + "  \"deviceType\": 1\r\n"
-	                        + "}")
+	                .body(requestBody.toString())
 	                .when()
 	                .post(Routes.Post_URL);
 
@@ -29,11 +46,6 @@ public class Auth {
 	        return token;
 	    }
 
+	
 	   
-	    public void getTokenTest() {
-	        // Get the token
-	        String token = getToken();
-
-	        // Print token
-	        System.out.println("Token: " + token);
-	    }}
+	   }

@@ -24,3 +24,4 @@ public void setReportDetails(reportDetails reportDetails) {
 	this.reportDetails = reportDetails;
 }
 }
+//syso

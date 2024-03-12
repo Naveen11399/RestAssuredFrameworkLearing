@@ -3,7 +3,8 @@ package api.test;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -18,11 +19,14 @@ import api.utilities.DataProviders;
 import io.restassured.response.Response;
 
 public class StdBulkImportTest {
+	
 
 	StudentBulkImportPojo student;
 	reportDetails report;
 	StdImportPojo studentPayload;
-
+    
+	public Logger log=LogManager.getLogger(this.getClass());
+	
 	@Test(dataProvider = "StdBulk", dataProviderClass = DataProviders.class, priority = 1)
 	public void testDataFromExcel(String admissionNumber, String admissionDate, String studentName, String gender,
 			String dob, String grade, String section, String aadharNumber, String studentEmail, String studentContactNo,
@@ -38,6 +42,8 @@ public class StdBulkImportTest {
 			String guardianQualification, String guardianIncome, String guardianOccupation, String guardianDesignation,
 			String guardianCompanyName, String guardianAadharNo, String guardianPassportNo,
 			String guardianCompanyAddress, String communication) {
+		
+		log.info("Data Driven Tesing Started");
 
 		student = new StudentBulkImportPojo();
 
@@ -110,11 +116,15 @@ public class StdBulkImportTest {
 		report.setFileName(fileName);
 		report.setPath(path);
 		student.setReportDetails(report);
+		
+		log.info("Data Driven Tesing Ended");
 
 	}
 
 	@Test(priority = 2)
 	public void viewFileInfo() throws JsonProcessingException {
+		
+		log.info("viewFileInfo Testing Started");
 
 		Response response = StudentEndPoints.viewFileInfo(this.report.getFileName(), this.report.getPath());
 
@@ -141,6 +151,8 @@ public class StdBulkImportTest {
 		studentPayload = new StdImportPojo();
 
 		studentPayload.setStudentDetails(jsonArrayString);
+		
+		log.info("viewFileInfo Testing Ended");
 
 	}
 
