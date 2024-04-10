@@ -31,7 +31,7 @@ public class StudentEndPoints {
 		                  .auth()
 		                  .oauth2(Auth.getToken())
 		                  .get(Routes.GET_Std_URL);
-		
+		  
 		return response;
 		
 	}

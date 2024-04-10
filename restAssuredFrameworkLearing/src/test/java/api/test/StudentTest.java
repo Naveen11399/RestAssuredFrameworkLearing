@@ -1,5 +1,6 @@
 package api.test;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -96,11 +97,15 @@ public class StudentTest {
 	public void deleteStudentInfo() {
 
 		Response response = StudentEndPoints.deleteStudent(this.studentPesonal.getStudentId());
+		
+		response.then()
+		.assertThat()
+		.statusCode(200);
 
 		String message = response.jsonPath().getString("message");
 		System.out.println("message: " + message);
+		
 		//response.then().log().all();
-
 		// System.out.println("Response: " + response.asString());
 	}
 
