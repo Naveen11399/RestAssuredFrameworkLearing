@@ -3,11 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="api.staffTest.StaffCreationTest">
+      <class name="api.staffTest.staffBulkImportTest">
         <methods>
-          <include name="StaffCreation"/>
+          <include name="UploadFile_Teacher"/>
         </methods>
-      </class> <!-- api.staffTest.StaffCreationTest -->
+      </class> <!-- api.staffTest.staffBulkImportTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -9,6 +9,7 @@
 			<class name="api.test.StudentTest" />
 			<class name="api.test.StudentTest2" />
 			<class name="api.test.StdBulkImportTest" />
+			<class name="api.staffTest.StaffCreationTest" />
 
 		</classes>
 	</test> <!-- Test -->
