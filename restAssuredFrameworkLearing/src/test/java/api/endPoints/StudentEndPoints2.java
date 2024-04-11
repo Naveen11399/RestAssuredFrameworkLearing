@@ -24,7 +24,7 @@ public class StudentEndPoints2 {
 		String BaseUrl=properties.getString("BaseUrl");
 		String createStdUrl=properties.getString("Create_Std_URL");
 		  String url = BaseUrl + createStdUrl;
-		System.out.println(url);
+	;
 		Response response= given()
 		.contentType(ContentType.JSON)
 		.accept(ContentType.JSON)

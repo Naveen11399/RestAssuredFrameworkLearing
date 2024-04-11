@@ -41,3 +41,51 @@
 17:57:29.607 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Ended
 17:57:29.612 [main] INFO  api.test.StdBulkImportTest - viewFileInfo Testing Started
 17:57:37.838 [main] INFO  api.test.StdBulkImportTest - viewFileInfo Testing Ended
+16:35:30.066 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Started
+16:35:35.366 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Ended
+16:35:35.370 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Started
+16:35:39.813 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Ended
+16:35:39.816 [main] INFO  api.test.StdBulkImportTest - viewFileInfo Testing Started
+16:35:43.095 [main] INFO  api.test.StdBulkImportTest - viewFileInfo Testing Ended
+16:37:54.666 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Started
+16:38:03.889 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Ended
+16:38:03.895 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Started
+16:38:06.965 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Ended
+16:38:06.971 [main] INFO  api.test.StdBulkImportTest - viewFileInfo Testing Started
+16:38:10.335 [main] INFO  api.test.StdBulkImportTest - viewFileInfo Testing Ended
+16:40:23.933 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Started
+16:40:32.409 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Ended
+16:40:32.423 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Started
+16:40:35.893 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Ended
+16:40:35.904 [main] INFO  api.test.StdBulkImportTest - viewFileInfo Testing Started
+16:40:39.531 [main] INFO  api.test.StdBulkImportTest - viewFileInfo Testing Ended
+16:45:54.258 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Started
+16:46:00.894 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Ended
+16:46:00.899 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Started
+16:46:04.556 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Ended
+16:46:04.565 [main] INFO  api.test.StdBulkImportTest - viewFileInfo Testing Started
+16:46:07.430 [main] INFO  api.test.StdBulkImportTest - viewFileInfo Testing Ended
+16:52:09.949 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Started
+16:52:16.334 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Ended
+16:52:16.349 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Started
+16:52:19.707 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Ended
+16:52:19.712 [main] INFO  api.test.StdBulkImportTest - viewFileInfo Testing Started
+16:52:22.627 [main] INFO  api.test.StdBulkImportTest - viewFileInfo Testing Ended
+16:54:15.657 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Started
+16:54:22.169 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Ended
+16:54:22.182 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Started
+16:54:25.372 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Ended
+16:54:25.377 [main] INFO  api.test.StdBulkImportTest - viewFileInfo Testing Started
+16:54:28.268 [main] INFO  api.test.StdBulkImportTest - viewFileInfo Testing Ended
+16:56:00.583 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Started
+16:56:03.961 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Ended
+16:56:03.965 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Started
+16:56:07.775 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Ended
+16:56:07.778 [main] INFO  api.test.StdBulkImportTest - viewFileInfo Testing Started
+16:56:10.925 [main] INFO  api.test.StdBulkImportTest - viewFileInfo Testing Ended
+19:10:35.056 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Started
+19:10:51.197 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Ended
+19:10:51.212 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Started
+19:10:56.474 [main] INFO  api.test.StdBulkImportTest - Data Driven Tesing Ended
+19:10:56.479 [main] INFO  api.test.StdBulkImportTest - viewFileInfo Testing Started
+19:11:01.482 [main] INFO  api.test.StdBulkImportTest - viewFileInfo Testing Ended
