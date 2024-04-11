@@ -21,8 +21,10 @@ public class StudentEndPoints2 {
 	
 	
 	public static Response createStudent(createStudent create_Std) {
-		
-		String url=properties.getString("Create_Std_URL");
+		String BaseUrl=properties.getString("BaseUrl");
+		String createStdUrl=properties.getString("Create_Std_URL");
+		  String url = BaseUrl + createStdUrl;
+		System.out.println(url);
 		Response response= given()
 		.contentType(ContentType.JSON)
 		.accept(ContentType.JSON)
@@ -38,8 +40,9 @@ public class StudentEndPoints2 {
 	}
 	
 	public static Response getCreatedStudent(String studentId) {
-		
-		String url=properties.getString("Get_Created_Std_URL");
+		String BaseUrl=properties.getString("BaseUrl");
+		String Get_Created_Std_URL=properties.getString("Get_Created_Std_URL");
+		String url = BaseUrl + Get_Created_Std_URL;
 	
 		Response response=
 				given()
@@ -54,8 +57,10 @@ public class StudentEndPoints2 {
 	
 	
 	public static Response deleteStudent(String studentId) {
+		String BaseUrl=properties.getString("BaseUrl");
 		
-		String url=properties.getString("Delete_Std_URL");
+		String Delete_Std_URL=properties.getString("Delete_Std_URL");
+		String url = BaseUrl + Delete_Std_URL;
 		Response  response=
 				given()
 				.auth()
