@@ -5,7 +5,7 @@
     <classes>
       <class name="api.staffTest.staffBulkImportTest">
         <methods>
-          <include name="UploadFile_Teacher"/>
+          <include name="deleteBulKImportStaff"/>
         </methods>
       </class> <!-- api.staffTest.staffBulkImportTest -->
     </classes>

@@ -48,7 +48,7 @@ public class Routes {
 
 	public static String UpdateStaffBulk_URL = Base_URL + "/teacher/update-teacher/{StaffId}";
 
-	public static String DeleteStaffBulk_URL = Base_URL + "teacher/delete-teacher/{StaffId}";// {userId}
+	public static String DeleteStaffBulk_URL = Base_URL + "/teacher/delete-teacher/{StaffId}";// {userId}
 	
 	
 	
