@@ -9,9 +9,9 @@ import java.util.Map;
 import com.aventstack.extentreports.gherkin.model.Given;
 
 import api.payloads.StdImportPojo;
-import api.payloads.StudentBulkImportPojo;
+
 import api.payloads.createStudent;
-import api.payloads.reportDetails;
+
 import api.payloads.studentInfo;
 import api.test.StdBulkImportTest;
 import api.test.StudentTest;
@@ -77,20 +77,20 @@ public class StudentEndPoints {
 		
 	}
 	
-	public static Response createBulkStudent(reportDetails report) {
+	public static Response createBulkStudent() {
 		
 		File file=new File(System.getProperty("user.dir") + "//testdata//Student-sample-data (1) (1).xlsx");
 		
 		Response response= given()
 				.contentType("multipart/form-data")
-	            .multiPart(file)
-	            .multiPart("report", report, "application/json")
+	            .multiPart("file", file, "application/json")
+	            .queryParam("path", "student-management/imports/")
 		        .auth()
 		        .oauth2(Auth.getToken())
 
 	         	.when()
 		
-	         	 .post(Routes.Std_Bulk_URL + "?path=student-management/imports/");
+	         	 .post(Routes.Std_Bulk_URL);
 		
 		return response;
 		

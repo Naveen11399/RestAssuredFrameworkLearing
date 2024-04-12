@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 
 import api.payloads.StdImportPojo;
 import api.payloads.createStudent;
-import api.payloads.reportDetails;
 import api.payloads.studentInfo;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -71,14 +70,13 @@ public class StudentEndPoints2 {
 		
 	}
 	
-	public static Response createBulkStudent(reportDetails report) {
+	public static Response createBulkStudent() {
 		
 		File file=new File(System.getProperty("user.dir") + "//testdata//Student-sample-data (1) (1).xlsx");
 		
 		Response response= given()
 				.contentType("multipart/form-data")
-	            .multiPart(file)
-	            .multiPart("report", report, "application/json")
+	            .multiPart("report", file, "application/json")
 		        .auth()
 		        .oauth2(Auth.getToken())
 

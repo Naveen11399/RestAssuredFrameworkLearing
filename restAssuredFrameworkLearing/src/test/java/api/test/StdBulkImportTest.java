@@ -13,16 +13,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import api.endPoints.StudentEndPoints;
 import api.payloads.StdImportPojo;
-import api.payloads.StudentBulkImportPojo;
-import api.payloads.reportDetails;
+
 import api.utilities.DataProviders;
 import io.restassured.response.Response;
 
 public class StdBulkImportTest {
 	
 
-	StudentBulkImportPojo student;
-	reportDetails report;
+
 	StdImportPojo studentPayload;
     
 	public Logger log=LogManager.getLogger(this.getClass());
@@ -45,77 +43,21 @@ public class StdBulkImportTest {
 		
 		log.info("Data Driven Tesing Started");
 
-		student = new StudentBulkImportPojo();
 
-		report = new reportDetails();
-		report.setAdmissionNumber(admissionNumber);
-		report.setAdmissionDate(admissionDate);
-		report.setStudentName(studentName);
-		report.setGender(gender);
-		report.setDob(dob);
-		report.setGrade(grade);
-		report.setSection(section);
-		report.setAadharNumber(aadharNumber);
-		report.setStudentEmail(studentEmail);
-		report.setStudentContactNo(studentContactNo);
-		report.setAddress(address);
-		report.setSecondLanguage(secondLanguage);
-		report.setThirdLanguage(thirdLanguage);
-		report.setBloodGroup(bloodGroup);
-		report.setNationality(nationality);
-		report.setCountry(country);
-		report.setState(state);
-		report.setReligion(religion);
-		report.setCommunity(community);
-		report.setPreviousSchool(previousSchool);
-		report.setPreviousGrade(previousGrade);
-		report.setDateOfLeaving(dateOfLeaving);
-		report.setTcIssuedDate(tcIssuedDate);
-		report.setReasonOfLeaving(reasonOfLeaving);
-		report.setFatherName(fatherName);
-		report.setFatherContactNo(fatherContactNo);
-		report.setFatherEmailId(fatherEmailId);
-		report.setFatherQualification(fatherQualification);
-		report.setFatherIncome(fatherIncome);
-		report.setFatherOccupation(fatherOccupation);
-		report.setFatherDesignation(fatherDesignation);
-		report.setFatherCompanyName(fatherCompanyName);
-		report.setFatherAadharNo(fatherAadharNo);
-		report.setFatherPassportNo(fatherPassportNo);
-		report.setFatherCompanyAddress(fatherCompanyAddress);
-		report.setMotherName(motherName);
-		report.setMotherContactNo(motherContactNo);
-		report.setMotherEmailId(motherEmailId);
-		report.setMotherQualification(motherQualification);
-		report.setMotherIncome(motherIncome);
-		report.setMotherOccupation(motherOccupation);
-		report.setMotherDesignation(motherDesignation);
-		report.setMotherCompanyName(motherCompanyName);
-		report.setMotherAadharNo(motherAadharNo);
-		report.setMotherPassportNo(motherPassportNo);
-		report.setMotherCompanyAddress(motherCompanyAddress);
-		report.setGuardianName(guardianName);
-		report.setGuardianEmailId(guardianEmailId);
-		report.setGuardianContactNo(guardianContactNo);
-		report.setGuardianQualification(guardianQualification);
-		report.setGuardianIncome(guardianIncome);
-		report.setGuardianOccupation(guardianOccupation);
-		report.setGuardianDesignation(guardianDesignation);
-		report.setGuardianCompanyName(guardianCompanyName);
-		report.setGuardianAadharNo(guardianAadharNo);
-		report.setGuardianPassportNo(guardianPassportNo);
-		report.setGuardianCompanyAddress(guardianCompanyAddress);
-		report.setCommunication(communication);
 
-		Response response = StudentEndPoints.createBulkStudent(report);
+
+		Response response = StudentEndPoints.createBulkStudent();
+		
+		response.then().log().body();
 
 		String path = response.jsonPath().get("data.path");
 
 		String fileName = response.jsonPath().get("data.name");
+		studentPayload = new StdImportPojo();
 
-		report.setFileName(fileName);
-		report.setPath(path);
-		student.setReportDetails(report);
+		studentPayload.setFileName(fileName);
+		studentPayload.setPath(path);
+
 		
 		log.info("Data Driven Tesing Ended");
 
@@ -126,7 +68,7 @@ public class StdBulkImportTest {
 		
 		log.info("viewFileInfo Testing Started");
 
-		Response response = StudentEndPoints.viewFileInfo(this.report.getFileName(), this.report.getPath());
+		Response response = StudentEndPoints.viewFileInfo(this.studentPayload.getFileName(), this.studentPayload.getPath());
 
 		ArrayList<LinkedHashMap<String, Object>> reportDetailsList = response.jsonPath().get("data.reportDetails");
 
@@ -144,11 +86,8 @@ public class StdBulkImportTest {
 
 		String jsonArrayString = jsonArray.toString();
 
-//		if (studentPayload == null) {
-//			studentPayload = new StdImportPojo();
-//		}
 
-		studentPayload = new StdImportPojo();
+	
 
 		studentPayload.setStudentDetails(jsonArrayString);
 		
